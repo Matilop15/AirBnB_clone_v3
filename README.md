@@ -66,6 +66,7 @@ Classes inherited from Base Model:
 * `def new(self, obj)` - sets in __objects the obj with key <obj class name>.id
 * `def save(self)` - serializes __objects to the JSON file (path: __file_path)
 * `def reload(self)` -  deserializes the JSON file to __objects
+NEW
 * `def get(self, cls, id)` - Returns the object based on the class and its ID, or None if not found
 * `def count(self, cls=None)` - Returns the number of objects in storage matching the given class. If no class is passed, returns the count of all objects in storage.
 
