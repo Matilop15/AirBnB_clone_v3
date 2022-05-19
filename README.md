@@ -3,8 +3,8 @@
 # AirBnB Clone - The Console
 The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
 
-## Lenguages
-<img src="https://img.icons8.com/color/80/000000/javascript--v1.png"/> <img src="https://img.icons8.com/ios-filled/80/000000/mysql-logo.png"/> <img src="https://img.icons8.com/color/80/000000/python--v1.png"/>
+## Lenguages and technologies
+<img src="https://img.icons8.com/color/80/000000/javascript--v1.png"/> <img src="https://img.icons8.com/ios-filled/80/000000/mysql-logo.png"/> <img src="https://img.icons8.com/color/80/000000/python--v1.png"/> <img src="https://img.icons8.com/color/80/000000/nginx.png"/> <img src="https://img.icons8.com/color/80/000000/html-5--v1.png"/> <img src="https://img.icons8.com/color/80/000000/css3.png"/>
 
 
 #### Functionalities of this command interpreter:
@@ -166,7 +166,7 @@ No known bugs at this time.
 Second part of Airbnb: Joann Vuong
 
 Third part of Airbnb: 
-- Matias Lopez - [Github](https://github.com/Matilop15)
-- Marco Sózaro - [Github](https://github.com/Marcosozhol)
+- Matias Lopez - [Github](https://github.com/Matilop15) - [LinkedIn](https://www.linkedin.com/in/matiaas-lopez/)
+- Marco Sózaro - [Github](https://github.com/Marcosozhol) - [LinkedIn](https://www.linkedin.com/in/marco-s%C3%B3zaro-76826364/)
 ## License
 Public Domain. No copy write protection. 
