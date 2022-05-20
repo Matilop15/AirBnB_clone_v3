@@ -71,9 +71,13 @@ class FileStorage:
 
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
-        all_objects = self.all(cls)
-        class_id = "{}.{}".format(cls.__name__, id)
-        return all_objects.get(class_id)
+        if (cls not in classes.keys()) or (id is None):
+            return None
+        all_objs = self.all(cls)
+        for keey in all_objs.keys():
+            if keey == id:
+                return all_objs[keey]
+            return None
 
     def count(self, cls=None):
         """
@@ -81,6 +85,7 @@ class FileStorage:
         If no class is passed, returns the count of all objects in storage.
         """
         if cls is None:
-            return len(self.all())
-        else:
+            return len(self.__objects)
+        if cls in classes:
             return len(self.all(cls))
+        return len(self.__objects)
