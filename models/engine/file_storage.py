@@ -76,8 +76,8 @@ class FileStorage:
             for obj_id in all_objs.keys():
                 if obj_id == id:
                     return all_objs[obj_id]
-                return None
-        return None
+                return "return1"
+        return "return2"
 
     def count(self, cls=None):
         """
