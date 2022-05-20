@@ -84,6 +84,4 @@ class FileStorage:
             var = len(self.all(cls))
             return var
         except(NameError):
-            return -1 
-
-        
+            return -1
