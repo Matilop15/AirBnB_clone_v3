@@ -71,13 +71,13 @@ class FileStorage:
 
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
-        if (cls not in classes.keys() or id is None):
-            return "hola"
+        if (cls not in classes.keys()):
+            return None
         all_objs = self.all(cls)
         for keey in all_objs.keys():
             if keey == id:
                 return all_objs[keey]
-            return "chau"
+            return None
 
     def count(self, cls=None):
         """
