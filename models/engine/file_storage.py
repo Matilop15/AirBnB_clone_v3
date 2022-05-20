@@ -86,6 +86,6 @@ class FileStorage:
         """
         if cls is None:
             return len(self.__objects)
-        if cls in classes.key():
+        if cls in classes.keys():
             return len(self.all(cls))
         return len(self.__objects)
