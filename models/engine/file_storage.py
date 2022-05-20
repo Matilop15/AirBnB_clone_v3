@@ -72,7 +72,7 @@ class FileStorage:
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
         if cls and id:
-            search = cls + "." + id
+            search = "{}.{}".format(cls, id)
             all_objs = self.all(cls)
             return all_objs.get(search)
         return None
@@ -87,4 +87,4 @@ class FileStorage:
             return len(self.__objects)
         if cls in classes.keys():
             return len(self.all(cls))
-        return len(self.__objects)
+        return "hola"
