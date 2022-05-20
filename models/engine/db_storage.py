@@ -76,11 +76,11 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-	    """ Returns the object based on the class and its ID"""
-	    if (cls not in classes.keys()) or (id is None):
+        """ Returns the object based on the class and its ID"""
+        if (cls not in classes.keys()) or (id is None):
 		    return None
         return self.__session.query(
-                    self.__models_available[cls]).get(id_)
+                self.__models_available[cls]).get(id_)
 
     def count(self, cls=None):
 	    """
