@@ -92,7 +92,7 @@ class DBStorage:
             for value in self.classes.values():
                 total += self.__session.query(value).count()
             return total
-        else if cls in self.classes.keys():
+        if cls in self.classes.keys():
             return self.__session.query(self.classes[cls]).count()
         total = 0
         for value in self.classes.values():
