@@ -83,10 +83,10 @@ class DBStorage:
                 self.__models_available[cls]).get(id_)
 
     def count(self, cls=None):
-	    """
-	    Returns the number of objects in storage matching the given class
-	    If no class is passed, returns the count of all objects in storage.
-	    """
+        """
+        Returns the number of objects in storage matching the given class
+        If no class is passed, returns the count of all objects in storage.
+        """
         if cls is None:
             total = 0
             for value in self.classes.values():
