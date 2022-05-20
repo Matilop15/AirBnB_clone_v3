@@ -71,7 +71,7 @@ class FileStorage:
 
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
-        if (cls not in self.classes.keys()):
+        if (cls not in classes.keys()):
             return None
         all_objs = self.all(cls)
         for keey in all_objs.keys():
@@ -86,6 +86,6 @@ class FileStorage:
         """
         if cls is None:
             return len(self.__objects)
-        if cls in classes:
+        if cls in classes.key():
             return len(self.all(cls))
         return len(self.__objects)
