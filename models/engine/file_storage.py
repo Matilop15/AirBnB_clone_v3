@@ -71,7 +71,7 @@ class FileStorage:
 
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
-        if (cls not in classes.keys()):
+        if (cls not in self.classes.keys()):
             return None
         all_objs = self.all(cls)
         for keey in all_objs.keys():
