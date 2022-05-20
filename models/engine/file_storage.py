@@ -72,6 +72,7 @@ class FileStorage:
     def get(self, cls, id):
         """ Returns the object based on the class and its ID"""
         search = "{}.{}".format(cls, id)
+        print("{}".format(search))
         all_obj = self.all(cls)
         return all_obj.get(search)
 
