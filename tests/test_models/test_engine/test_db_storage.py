@@ -92,4 +92,9 @@ class Testfor_get(unittest.Testcase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get(self):
         """Test for get, returns object, or none"""
-        
+
+    def test_count_all(self):
+        """... checks if count() functions with no class"""
+        count_all = storage.count()
+        expected = 6
+        self.assertEqual(expected, count_all)
