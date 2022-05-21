@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+
 FileStorage = file_storage.FileStorage
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -116,19 +117,19 @@ class TestFileStorage(unittest.TestCase):
         
     def test_count_cls(self):
         """... checks count method with class input arg"""
-        count_State = storage.count('State')
-        expected = 1
+        count_State = FileStorage.count('State')
+        expected = len(FileStorage.all('State'))
         self.assertEqual(expected, count_State)
 
     def test_count_all(self):
         """... checks the count method with no class input"""
-        count_all = storage.count()
-        expected = 2
+        count_all = FileStorage.count(self)
+        expected = len(FileStorage.all())
         self.assertEqual(expected, count_all)
 
     def test_get_cls_id(self):
         """... checks get method with class and id inputs"""
-        duplicate = storage.get('State', self.state.id)
+        first_state_id = list(FileStorage.all(State).values())[0].id)
+	duplicate = FileStorage.get('State', first_state_id)
         expected = self.state.id
-        actual = duplicate.id
-        self.assertEqual(expected, actual)
+        self.assertEqual(expected, duplicate)
