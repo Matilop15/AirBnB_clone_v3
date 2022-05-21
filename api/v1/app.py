@@ -16,7 +16,7 @@ def teardown(self):
     storage.close()
     
 def not_found(error):
-    return jsonify("error": "Not found")
+    return jsonify({"error": "Not found"})
 
 if __name__ == '__main__':
     api_host = getenv('HBNB_API_HOST', default='0.0.0.0')
