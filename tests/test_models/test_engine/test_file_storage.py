@@ -5,6 +5,7 @@ Contains the TestFileStorageDocs classes
 
 from datetime import datetime
 import inspect
+from models import storage
 import models
 from models.engine import file_storage
 from models.amenity import Amenity
@@ -117,19 +118,12 @@ class TestFileStorage(unittest.TestCase):
         
     def test_count_cls(self):
         """... checks count method with class input arg"""
-        count_State = FileStorage.count('State')
-        expected = len(FileStorage.all('State'))
+        count_State = storage.count(State)
+        expected = len(storage.all(State))
         self.assertEqual(expected, count_State)
 
     def test_count_all(self):
         """... checks the count method with no class input"""
-        count_all = FileStorage.count(self)
-        expected = len(FileStorage.all())
+        count_all = storage.count(self)
+        expected = len(storage.all(self))
         self.assertEqual(expected, count_all)
-
-    def test_get_cls_id(self):
-        """... checks get method with class and id inputs"""
-        first_state_id = list(FileStorage.all(State).values())[0].id)
-	duplicate = FileStorage.get('State', first_state_id)
-        expected = self.state.id
-        self.assertEqual(expected, duplicate)
