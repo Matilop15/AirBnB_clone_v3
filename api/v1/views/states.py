@@ -2,11 +2,13 @@
 """Create a new view for State objects that
 handles all default RESTFul API actions
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort, request, Response, make_response
+from api.v1.views import app_views
+from models.state import State
+from models import storage
 
-
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
-def get_states():
+@app_views.route('/states', strict_slashes=False)
+def all_states():
     """Retrieves the list of all State objects: GET /api/v1/states"""
     all_states = storage.all(State).values()
     list_states = []
@@ -23,3 +25,57 @@ def get_states(state_id):
         abort(404)
 
     return jsonify(state.to_dict())
+
+
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_state(state_id):
+    """
+    deletes a State object
+    """
+    state = storage.get('State', state_id)
+    if state is None:
+        abort(404)
+
+    storage.delete(state)
+    storage.save()
+
+    return make_response(jsonify({}), 200)
+
+
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
+def post_state():
+    """
+    post a State object
+    """
+    if not request.json:
+        abort(400, "Not a JSON")
+    data = request.json
+    if 'name' not in data.keys():
+        abort(400, "Missing name")
+    instance = State(**data)
+    storage.new(instance)
+    storage.save()
+
+    return make_response(jsonify(instance.to_dict()), 201)
+
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def update_state(state_id):
+    """
+    update a State object
+    """
+    state = storage.get('State', state_id)
+    if state is None:
+        abort(404)
+
+    if not request.json:
+        abort(400, "Not a JSON")
+
+    data = request.json
+    for key, value in data.items():
+        setattr(state, key, value)
+
+    storage.save()
+
+    return make_response(jsonify(state.to_dict()), 200)
