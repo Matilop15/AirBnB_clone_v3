@@ -54,7 +54,7 @@ class DBStorage:
     def new(self, obj):
         """add the object to the current database session"""
         self.__session.add(obj)
-        
+
     def save(self):
         """commit all changes of the current database session"""
         self.__session.commit()
@@ -70,7 +70,7 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
-        
+
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
@@ -82,15 +82,12 @@ class DBStorage:
         return self.__session.query(classes[cls]).get(id)
 
     def count(self, cls=None):
-        """
-        Returns the number of objects in storage matching the given class
-        If no class is passed, returns the count of all objects in storage.
-        """
+        """Returns the number of objects in storage matching the given clase"""
         if cls is None:
             total = 0
             for value in classes.values():
-                total += self.__session.query(value).count()
-            return total
-        if cls in classes.keys():
-            return self.__session.query(classes[cls]).count()
-        return -1
+                total += self.__session.query(value).all()
+                return total
+            if cls in classes.keys():
+                return self.__session.query(classes[cls]).all()
+            return -1
