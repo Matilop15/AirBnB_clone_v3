@@ -1,2 +1,12 @@
 MarcoSózaro
+Matilop15
 aquí va un comentario sobre el código de Matias??
+aquí va un comentario sobre el código de Marco??
+
+preguntas sobre la pieza de código, si es difícil de entender
+problemas de estilo
+manejo de errores
+código duplicado
+errores potenciales
+posibles problemas de eficiencia
+errores tipográfico
