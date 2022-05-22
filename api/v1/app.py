@@ -1,6 +1,7 @@
 #!/user/bin/python3
 """
-Create the API
+ folder api at the root of the project
+ with an empty file __init__.py
 """
 from os import getenv
 from flask import Flask, jsonify, make_response
