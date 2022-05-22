@@ -1,4 +1,4 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """
  folder api at the root of the project
  with an empty file __init__.py
