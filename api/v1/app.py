@@ -3,7 +3,7 @@
 Create the API
 """
 from os import getenv
-from flask import Flask, Blueprint, jsonify, make_response
+from flask import Flask, jsonify, make_response
 from api.v1.views import app_views
 from models import storage
 
@@ -19,6 +19,7 @@ def teardown(self):
 
 @app.errorhandler(404)
 def not_found(error):
+    """handler 404 error"""
     return make_response(jsonify({'error': "Not found"}), 404)
 
 
