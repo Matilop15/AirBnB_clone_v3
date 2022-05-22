@@ -100,7 +100,7 @@ class Testfor_get_and_count(unittest.TestCase):
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
-        """ test for count methond"""
+        """test for count methond"""
         count = models.storage.count("State")
         call = State()
         call.save()
