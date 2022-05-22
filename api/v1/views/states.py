@@ -7,7 +7,8 @@ from api.v1.views import app_views
 from models.state import State
 from models import storage
 
-@app_views.route('/states', strict_slashes=False)
+
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def all_states():
     """Retrieves the list of all State objects: GET /api/v1/states"""
     all_states = storage.all(State).values()
@@ -20,8 +21,8 @@ def all_states():
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_states(state_id):
     """Retrieves a State object: GET /api/v1/states/<state_id>"""
-    state = storage.get(State, state_id)
-    if not state:
+    state = storage.get("State", state_id)
+    if state is None:
         abort(404)
 
     return jsonify(state.to_dict())
@@ -36,11 +37,10 @@ def delete_state(state_id):
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
-
-    storage.delete(state)
-    storage.save()
-
-    return make_response(jsonify({}), 200)
+    else:
+        storage.delete(obj)
+        storage.save()
+        return jsonifi({}), 200
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
@@ -48,16 +48,16 @@ def post_state():
     """
     post a State object
     """
-    if not request.json:
+    post = request.get_json(silent=True)
+    if post is None:
         abort(400, "Not a JSON")
-    data = request.json
-    if 'name' not in data.keys():
+    elif 'name' not in post.keys():
         abort(400, "Missing name")
-    instance = State(**data)
-    storage.new(instance)
-    storage.save()
-
-    return make_response(jsonify(instance.to_dict()), 201)
+    else:
+        instance = State(**post)
+        storage.new(instance)
+        storage.save()
+        return jsonify(instance.to_dict()), 201
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
@@ -68,14 +68,15 @@ def update_state(state_id):
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
-
-    if not request.json:
+    obj = request.get_json(silent=True)
+    if obj is None:
         abort(400, "Not a JSON")
-
-    data = request.json
-    for key, value in data.items():
-        setattr(state, key, value)
-
-    storage.save()
-
-    return make_response(jsonify(state.to_dict()), 200)
+    else:
+        for key, value in obj.items():
+            if key in ['id', 'created_at', 'updated_at']:
+                pass
+            else:
+                setattr(state, key, value)
+        storage.save()
+        res = state.to.dict()
+        return jsonify(res), 200
