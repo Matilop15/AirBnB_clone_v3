@@ -57,7 +57,6 @@ def post_amenity():
     """
     Creates a City: POST /api/v1/states/<state_id>/cities
     """
-    amen = storage.all(Amenity)
     post = request.get_json(silent=True)
     if post is None:
         abort(400, "Not a JSON")
