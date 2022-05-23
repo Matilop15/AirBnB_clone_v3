@@ -28,9 +28,10 @@ def get_amenities():
                  strict_slashes=False)
 def get_amenity(amenity_id):
     """Retrieves a City object. : GET /api/v1/cities/<city_id>"""
-    amenity = storage.get(Amenity, amenity_id)
-    if amenity:
-        return jsonify(amenity.to_dict())
+    ameni = storage.all(Amenity)
+    for amen in ameni.values():
+        if amen.id == amenity_id:
+            return jsonify(amen.to_dict())
     else:
         abort(404)
 
