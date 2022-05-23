@@ -6,12 +6,15 @@ RESTFul API actions
 from flask import Flask, jsonify, abort, request
 from api.v1.views import app_views
 from models.city import City
-from models import storage
+from models import state, storage
 
 
-@app_views.route('/city', methods=['GET'], strict_slashes=False)
-def all_city():
-    """Retrieves the list of all city objects: GET /api/v1/city"""
+@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+def all_city(state_id):
+    """
+    Retrieves the list of all City objects of
+    a State: GET /api/v1/states/<state_id>/cities
+    """
     all_city = storage.all(city)
     list_city = []
     for city in all_city.values():
@@ -25,7 +28,7 @@ def all_city():
                  strict_slashes=False)
 def get_city(city_id):
     """Retrieves a city object: GET /api/v1/citys/<city_id>"""
-    city = storage.get(city, city_id)
+    state = storage.get(State, state_id)
     if city:
         return jsonify(city.to_dict())
     else:
