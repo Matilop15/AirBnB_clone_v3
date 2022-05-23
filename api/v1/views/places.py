@@ -5,10 +5,10 @@ objects that handles all default RESTFul API actions
 from api.v1.views.states import all_states
 from flask import Flask, jsonify, abort, request
 from api.v1.views import app_views
-from models.state import State
 from models.city import City
 from models import storage
 from models.place import Place
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
@@ -20,9 +20,9 @@ def get_places(city_id):
     """
     list_cities = []
     city = storage.get(City, city_id)
-    if not state:
+    if not city:
         abort(404)
-    for citys in city.cities:
+    for citys in city.values():
         list_cities.append(citys.to_dict())
 
     return jsonify(list_cities)
@@ -31,7 +31,7 @@ def get_places(city_id):
 @app_views.route('/places/<string:place_id>',
                  methods=['GET'],
                  strict_slashes=False)
-def get_place(places_id):
+def get_place(place_id):
     """Retrieves a Paces object. : GET /api/v1/places/<place_id>"""
     placess = storage.get(Place, place_id)
     if placess:
@@ -73,7 +73,7 @@ def post_place(city_id):
     elif 'name' not in post.keys():
         abort(400, "Missing name")
     else:
-        user = storage.get(User, user_id)
+        user = storage.get(User, post['user_id'])
         if user is None:
             abort(404)
 
