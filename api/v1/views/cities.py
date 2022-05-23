@@ -60,6 +60,10 @@ def post_city(state_id):
     """
     Creates a City: POST /api/v1/states/<state_id>/cities
     """
+    state = storage.get(State, state_id)
+    if not state:
+        abort(404)
+
     post = request.get_json(silent=True)
     if post is None:
         abort(400, "Not a JSON")
