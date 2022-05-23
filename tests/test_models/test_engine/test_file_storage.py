@@ -19,6 +19,7 @@ import json
 import os
 import pep8
 import unittest
+r = './file.json'
 
 FileStorage = file_storage.FileStorage
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
@@ -127,3 +128,42 @@ class TestFileStorage(unittest.TestCase):
         count_all = storage.count(self)
         expected = len(storage.all(self))
         self.assertEqual(expected, count_all)
+##new
+    def setUp(self):
+        """initializes new state and cities for testing"""
+        if os.path.isfile(r):
+            os.remove(r)
+        storage.reload()
+        self.state = State()
+        self.state.name = 'California'
+        self.state.save()
+        self.city1 = City()
+        self.city1.name = 'San_José'
+        self.city1.state_id = self.state.id
+        self.city1.save()
+        self.city2 = City()
+        self.city2.name = 'San_Francisco'
+        self.city2.state_id = self.state.id
+        self.city2.save()
+
+    def test_get(self):
+        """check if get method returns state"""
+        real_state = storage.get("State", self.state.id)
+        fake_state = storage.get("State", "12345")
+        no_state = storage.get("", "")
+
+        self.assertEqual(real_state, self.state)
+        self.assertNotEqual(fake_state, self.state)
+        self.assertIsNone(no_state)
+
+    def test_count(self):
+        """checks if count method returns correct numbers"""
+        state_count = storage.count("State")
+        city_count = storage.count("City")
+        place_count = storage.count("Place")
+        all_count = storage.count(None)
+
+        self.assertEqual(state_count, storage.all(State))
+        self.assertEqual(city_count, storage.all(City))
+        self.assertEqual(place_count, storage.all(Place))
+        self.assertEqual(all_count, storage.all())
