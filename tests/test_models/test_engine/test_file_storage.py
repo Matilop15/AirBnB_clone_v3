@@ -148,7 +148,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_get(self):
         """check if get method returns state"""
-        real_state = storage.get("State", State.id)
+        real_state = storage.get(State, self.state.id)
         fake_state = storage.get("State", "12345")
         no_state = storage.get("", "")
 
