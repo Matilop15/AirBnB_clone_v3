@@ -64,8 +64,8 @@ def post_amenity():
         abort(400, "Missing name")
     else:
         instance = Amenity(**post)
-        instance.amenity_id = amenity_id
-        instance.save()
+        storage.new(instance)
+        storage.save()
         return jsonify(instance.to_dict()), 201
 
 
