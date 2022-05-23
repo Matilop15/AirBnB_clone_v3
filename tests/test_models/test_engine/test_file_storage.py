@@ -165,7 +165,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(city_count, len(storage.all(City)))
         self.assertEqual(place_count, len(storage.all(Place)))
         self.assertEqual(all_count, len(storage.all()))
-        
+
     def test_save(self):
         """Test that save properly saves objects to file.json"""
         storage = FileStorage()

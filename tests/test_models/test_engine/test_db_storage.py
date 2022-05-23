@@ -19,6 +19,7 @@ import json
 import os
 import pep8
 import unittest
+
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -88,6 +89,7 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test that save properly saves objects to file.json"""
 
+
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     def test_all_returns_dict(self):
@@ -109,22 +111,3 @@ class Testfor_get_and_count(unittest.TestCase):
         call = State()
         call.save()
         self.assertEqual(storage.count(State), count + 1)
-
-    def test_save(self):
-        """Test that save properly saves objects to file.json"""
-        storage = FileStorage()
-        new_dict = {}
-        for key, value in classes.items():
-            instance = value()
-            instance_key = instance.__class__.__name__ + "." + instance.id
-            new_dict[instance_key] = instance
-        save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = new_dict
-        storage.save()
-        FileStorage._FileStorage__objects = save
-        for key, value in new_dict.items():
-            new_dict[key] = value.to_dict()
-        string = json.dumps(new_dict)
-        with open("file.json", "r") as f:
-            js = f.read()
-        self.assertEqual(json.loads(string), json.loads(js))
