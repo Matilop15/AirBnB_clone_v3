@@ -13,24 +13,26 @@ from os import environ
 
 @app_views.route('/places/<string:place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
-def get_place_amenities(place_id):
+def get_place_amenities(place_id=False):
     """
     Retrieves the list of all Amenity objects of a Place:
     GET /api/v1/places/<place_id>/amenities
     """
+    if place_id is None:
+        abort(404)
     list_places_amenities = []
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    if environ.get('HBNB_TYPE_STORAGE') == "db":
-        for amenity in place.amenities:
-            list_places_amenities.append(amenity.to_dict())
+    if environ.get('HBNB_TYPE_STORAGE') != "db":
+        amens = storage.all(Amenity)
+        for amenity in amens.values():
+            if amenity.id in place.amenity_ids:
+               list_places_amenities.append(amenity)
     else:
-        for amenity_id in place.amenity_ids:
-            list_places_amenities.append((storage.get(Amenity,
-                                                      amenity_id).to_dict()))
+         list_places_amenities = place.amenities
 
-    return jsonify(list_places_amenities)
+    return jsonify([amenity.to_dict() for amenity in list_places_amenities])
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
