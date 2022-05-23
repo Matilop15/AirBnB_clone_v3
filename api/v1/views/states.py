@@ -78,5 +78,5 @@ def update_state(state_id):
             else:
                 setattr(state, key, value)
         storage.save()
-        res = state.to.dict()
+        res = state.to_dict()
         return make_response(jsonify(res), 200)
