@@ -31,4 +31,3 @@ if __name__ == '__main__':
     api_host = getenv('HBNB_API_HOST', default='0.0.0.0')
     api_port = getenv('HBNB_API_PORT', default=5000)
     app.run(debug=True, host=api_host, port=int(api_port), threaded=True)
-    app.register_error_handler(404, not_found)
