@@ -5,8 +5,7 @@ handles all default RESTFul API actions
 from tkinter import Place
 from flask import Flask, jsonify, abort, request
 from api.v1.views import app_views
-from models import review
-from models.state import State
+from models.place import Place
 from models.review import Review
 from models import storage
 
