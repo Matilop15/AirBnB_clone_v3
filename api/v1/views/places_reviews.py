@@ -2,7 +2,6 @@
 """Create a new view for Review object that
 handles all default RESTFul API actions
 """
-from tkinter import Place
 from flask import Flask, jsonify, abort, request
 from api.v1.views import app_views
 from models.place import Place
