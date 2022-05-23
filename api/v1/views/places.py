@@ -73,7 +73,7 @@ def post_place(city_id):
     elif 'name' not in post.keys():
         abort(400, "Missing name")
     else:
-        user = storage.get(User, data['user_id'])
+        user = storage.get(User, post['user_id'])
         if user is None:
             abort(404)
 
