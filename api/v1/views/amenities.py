@@ -74,7 +74,8 @@ def post_amenity():
         return jsonify(instance.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_amenitie(amenity_id):
     """
     Updates a City object: PUT /api/v1/cities/<city_id>
