@@ -65,8 +65,8 @@ def post_city(state_id):
         abort(400, "Missing name")
     else:
         instance = City(**post)
-        storage.new(instance)
-        storage.save()
+        instance.state_id = state_id
+        instance.save()
         return jsonify(instance.to_dict()), 201
 
 
