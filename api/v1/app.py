@@ -21,10 +21,10 @@ def teardown(exception):
     storage.close()
 
 
-@app.errorhandler(404)
-def not_found(error):
-    """handler 404 error"""
-    return make_response(jsonify({'error': "Not found"}), 404)
+# @app.errorhandler(404)
+# def not_found(error):
+#    """handler 404 error"""
+    # return make_response(jsonify({'error': "Not found"}), 404)
 
 
 if __name__ == '__main__':
