@@ -128,7 +128,7 @@ class TestFileStorage(unittest.TestCase):
         count_all = storage.count(self)
         expected = len(storage.all(self))
         self.assertEqual(expected, count_all)
-##new
+
     def setUp(self):
         """initializes new state and cities for testing"""
         if os.path.isfile(r):
