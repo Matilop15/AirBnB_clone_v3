@@ -17,8 +17,6 @@ def get_amenities():
     """Retrieves the list of all amenities objects"""
     list_amenities = []
     amen = storage.all(Amenity)
-    if not amen:
-        abort(404)
     for ameniti in amen.values():
         list_amenities.append(ameniti.to_dict())
 
