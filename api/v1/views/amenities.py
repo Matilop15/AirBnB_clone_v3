@@ -16,7 +16,7 @@ from models import storage
 def get_amenities():
     """Retrieves the list of all amenities objects"""
     list_amenities = []
-    amen = storage.all(Amenities)
+    amen = storage.all(Amenity)
     if not amen:
         abort(404)
     for ameniti in amen.values():
@@ -58,7 +58,7 @@ def post_amenity():
     """
     Creates a City: POST /api/v1/states/<state_id>/cities
     """
-    amen = storage.get(Amenity)
+    amen = storage.all(Amenity)
     if not amen:
         abort(404)
 
