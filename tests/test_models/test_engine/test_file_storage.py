@@ -153,7 +153,6 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertEqual(real_state, self.state)
         self.assertNotEqual(fake_state, self.state)
-    
 
     def test_count(self):
         """checks if count method returns correct numbers"""
