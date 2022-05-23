@@ -8,6 +8,7 @@ from api.v1.views import app_views
 from models.city import City
 from models import storage
 from models.place import Place
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
@@ -72,7 +73,7 @@ def post_place(city_id):
     elif 'name' not in post.keys():
         abort(400, "Missing name")
     else:
-        user = storage.get(User, user_id)
+        user = storage.get(User, data['user_id'])
         if user is None:
             abort(404)
 
