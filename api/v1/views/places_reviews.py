@@ -96,7 +96,8 @@ def update_review(review_id):
         abort(400, "Not a JSON")
     else:
         for key, value in obj.items():
-            if key in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:
+            if key in ['id', 'user_id', 'place_id',
+                       'created_at', 'updated_at']:
                 pass
             else:
                 setattr(review, key, value)
