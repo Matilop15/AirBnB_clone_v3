@@ -25,10 +25,10 @@ def all_states():
 def get_states(state_id):
     """Retrieves a State object: GET /api/v1/states/<state_id>"""
     state = storage.get(State, state_id)
-    if state is None:
+    if state:
+        return jsonify(state.to_dict())
+    else:
         abort(404)
-
-    return jsonify(state.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
