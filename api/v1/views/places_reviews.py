@@ -30,7 +30,6 @@ def get_review(place_id):
 @app_views.route('/reviews/<string:review_id>',
                  methods=['GET'],
                  strict_slashes=False)
-                 
 def get_review(review_id):
     """Retrieves a Review object. : GET /api/v1/reviews/<review_id>"""
     review = storage.get(Review, review_id)
