@@ -18,14 +18,16 @@ def get_places(city_id):
     Retrieves the list of all Places objects
     of a specific city
     """
-    list_cities = []
+    list_places = []
     city = storage.get(City, city_id)
     if not city:
         abort(404)
-    for citys in city.values():
-        list_cities.append(citys.to_dict())
+    citys = storage.all(Place)
+    for obj in citys.values():
+        if obj.city_id == city_id: 
+            list_places.append(obj.to_dict())
 
-    return jsonify(list_cities)
+    return jsonify(list_places)
 
 
 @app_views.route('/places/<string:place_id>',
@@ -68,7 +70,8 @@ def post_place(city_id):
     post = request.get_json(silent=True)
     if post is None:
         abort(400, "Not a JSON")
-    elif 'user_id' not in post.keys():
+    post['city_id'] = city_id
+    if 'user_id' not in post.keys():
         abort(400, "Missing name")
     elif 'name' not in post.keys():
         abort(400, "Missing name")
