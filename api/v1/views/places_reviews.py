@@ -32,7 +32,7 @@ def get_review(place_id):
                  strict_slashes=False)
 def get_review(review_id):
     """Retrieves a Review object. : GET /api/v1/reviews/<review_id>"""
-    review = storage.get(review, review_id)
+    review = storage.get(Review, review_id)
     if review:
         return jsonify(review.to_dict())
     else:
