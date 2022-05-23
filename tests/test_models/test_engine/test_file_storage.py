@@ -149,7 +149,7 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """check if get method returns state"""
         real_state = storage.get(State, self.state.id)
-        fake_state = storage.get("State", "12345")
+        fake_state = storage.get(State, "12345")
         no_state = storage.get("", "")
 
         self.assertEqual(real_state, self.state)
@@ -158,9 +158,9 @@ class TestFileStorage(unittest.TestCase):
 
     def test_count(self):
         """checks if count method returns correct numbers"""
-        state_count = storage.count("State")
-        city_count = storage.count("City")
-        place_count = storage.count("Place")
+        state_count = storage.count(State)
+        city_count = storage.count(City)
+        place_count = storage.count(Place)
         all_count = storage.count(None)
 
         self.assertEqual(state_count, len(storage.all(State)))
