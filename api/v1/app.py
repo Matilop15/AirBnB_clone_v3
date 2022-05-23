@@ -4,7 +4,7 @@
  with an empty file __init__.py
 """
 from os import getenv
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify
 from api.v1.views import app_views
 from api.v1.views.index import *
 from models import storage
@@ -24,7 +24,7 @@ def teardown(exception):
 @app.errorhandler(404)
 def not_found(error):
    """handler 404 error"""
-   return make_response(jsonify({'error': "Not found"}), 404)
+   return jsonify({'error': "Not found"}), 404
 
 
 if __name__ == '__main__':
