@@ -24,7 +24,7 @@ def all_states():
                  strict_slashes=False)
 def get_states(state_id):
     """Retrieves a State object: GET /api/v1/states/<state_id>"""
-    state = storage.get("State", state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
 
