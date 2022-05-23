@@ -88,7 +88,7 @@ def update_amenitie(amenity_id):
         abort(400, "Not a JSON")
     else:
         for key, value in obj.items():
-            if key in ['id', 'state_id', 'created_at', 'updated_at']:
+            if key in ['id', 'created_at', 'updated_at']:
                 pass
             else:
                 setattr(amen, key, value)
