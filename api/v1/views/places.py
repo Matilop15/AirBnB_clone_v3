@@ -8,7 +8,7 @@ from api.v1.views import app_views
 from models.state import State
 from models.city import City
 from models import storage
-from models.places import Places
+from models.place import Place
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
