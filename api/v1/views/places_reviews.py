@@ -10,7 +10,7 @@ from models.user import User
 from models import storage
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['GET'],
+@app_views.route('/places/<string:place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def get_review(place_id):
     """
@@ -21,7 +21,7 @@ def get_review(place_id):
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    for review in place.review:
+    for review in place.values():
         list_review.append(review.to_dict())
 
     return jsonify(list_review)
@@ -30,6 +30,7 @@ def get_review(place_id):
 @app_views.route('/reviews/<string:review_id>',
                  methods=['GET'],
                  strict_slashes=False)
+                 
 def get_review(review_id):
     """Retrieves a Review object. : GET /api/v1/reviews/<review_id>"""
     review = storage.get(Review, review_id)
@@ -67,7 +68,8 @@ def post_review(place_id):
     post = request.get_json(silent=True)
     if post is None:
         abort(400, "Not a JSON")
-    elif 'user_id' not in post.keys():
+    post['place_id'] = place_id
+    if 'user_id' not in post.keys():
         abort(400, "Missing user_id")
     elif 'text' not in post.keys():
         abort(400, "Missing text")
