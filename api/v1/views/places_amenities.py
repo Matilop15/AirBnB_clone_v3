@@ -24,7 +24,7 @@ def get_place_amenities(place_id=None):
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    if environ.get('HBNB_TYPE_STORAGE') != "db":
+    if os.getenv('HBNB_TYPE_STORAGE') != "db":
         amens = storage.all(Amenity)
         for amenity in amens.values():
             if amenity.id in place.amenity_ids:
@@ -49,7 +49,7 @@ def delete_place_amenity(place_id, amenity_id):
     if not amenity:
         abort(404)
 
-    if environ.get('HBNB_TYPE_STORAGE') != "db":
+    if os.getenv('HBNB_TYPE_STORAGE') != "db":
         if amenity not in place.amenity_ids:
             abort(404)
         index = None
@@ -86,7 +86,7 @@ def post_place_amenity(place_id, amenity_id):
     if not amenity:
         abort(404)
 
-    if environ.get('HBNB_TYPE_STORAGE') != "db":
+    if os.getenv('HBNB_TYPE_STORAGE') != "db":
         if amenity_id in place.amenity_ids:
             return jsonify(amenity.to_dict()), 200
         else:
