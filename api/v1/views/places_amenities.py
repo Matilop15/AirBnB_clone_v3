@@ -50,6 +50,7 @@ def delete_place_amenity(place_id, amenity_id):
 
     if os.getenv('HBNB_TYPE_STORAGE') == "db":
         place_amenities = place.amenities
+        place.amenities.remove(amenity)
     else:
         place_amenities = place.amenity_ids
     if amenity not in place_amenities:
