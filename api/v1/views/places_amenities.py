@@ -28,9 +28,9 @@ def get_place_amenities(place_id=False):
         amens = storage.all(Amenity)
         for amenity in amens.values():
             if amenity.id in place.amenity_ids:
-               list_places_amenities.append(amenity)
+                list_places_amenities.append(amenity)
     else:
-         list_places_amenities = place.amenities
+        list_places_amenities = place.amenities
 
     return jsonify([amenity.to_dict() for amenity in list_places_amenities])
 
