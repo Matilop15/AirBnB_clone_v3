@@ -13,7 +13,7 @@ from os import environ
 
 @app_views.route('/places/<string:place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
-def get_place_amenities(place_id=False):
+def get_place_amenities(place_id=None):
     """
     Retrieves the list of all Amenity objects of a Place:
     GET /api/v1/places/<place_id>/amenities
