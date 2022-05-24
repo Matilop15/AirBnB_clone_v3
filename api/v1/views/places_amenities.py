@@ -62,7 +62,7 @@ def delete_place_amenity(place_id, amenity_id):
     else:
         index = None
         for idx, amen in enumerate(place.amenities):
-            if amen_id == amenity_ids:
+            if amen.id == amenity.id:
                 index = idx
                 break
             if index is None:
@@ -87,7 +87,7 @@ def post_place_amenity(place_id, amenity_id):
         abort(404)
 
     if environ.get('HBNB_TYPE_STORAGE') != "db":
-        if amenity in place.amenity_ids:
+        if amenity_id in place.amenity_ids:
             return jsonify(amenity.to_dict()), 200
         else:
             place.amenity_ids.append(amenity_id)
