@@ -58,15 +58,15 @@ def delete_place_amenity(place_id, amenity_id):
                 index = idx
                 break
         del place.amenity_ids[index]
-        place.save()      
+        place.save()
     else:
         index = None
         for idx, amen in enumerate(place.amenities):
             if amen_id == amenity_ids:
-               index = idx
-               break
+                index = idx
+                break
             if index is None:
-               abort(404)
+                abort(404)
         del place.amenities[index]
         place.save()
     return jsonify({}), 200
