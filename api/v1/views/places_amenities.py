@@ -4,7 +4,7 @@ objects and Amenity objects that handles all
 default RESTFul API actions
 """
 from flask import Flask, jsonify, abort, request
-from api.v1.views import amenities, app_views
+from api.v1.views import app_views
 from models.place import Place
 from models.amenity import Amenity
 from models import storage
