@@ -23,7 +23,8 @@ def get_place_amenities(place_id=None):
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    return jsonify([amenity.to_dict() for amenity in getattr(place, "amenities")])
+    return jsonify([amenity.to_dict() for amenity in getattr(place,
+                                                             "amenities")])
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
