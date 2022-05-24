@@ -50,7 +50,7 @@ def delete_place_amenity(place_id, amenity_id):
         abort(404)
 
     if environ.get('HBNB_TYPE_STORAGE') != "db":
-        if amenity not in place.amenities:
+        if amenity not in place.amenity_ids:
             abort(404)
         index = None
         for idx, id in enumerate(place.amenity_ids):
