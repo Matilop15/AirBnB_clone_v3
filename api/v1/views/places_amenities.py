@@ -3,12 +3,12 @@
 objects and Amenity objects that handles all
 default RESTFul API actions
 """
-from flask import Flask, jsonify, abort, request
+from flask import jsonify, abort
 from api.v1.views import app_views
 from models.place import Place
 from models.amenity import Amenity
 from models import storage
-import os
+from api.v1.views import *
 
 
 @app_views.route('/places/<string:place_id>/amenities', methods=['GET'],
@@ -20,14 +20,10 @@ def get_place_amenities(place_id=None):
     """
     if place_id is None:
         abort(404)
-    list_amenity = []
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
-    for list_amenity in getattr(place, amenities):
-        list_amenity.to_dict()
-
-    return jsonify(list_amenity)
+    return jsonify([amenity.to_dict() for amenity in getattr(place, amenities)])
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
@@ -44,9 +40,9 @@ def delete_place_amenity(place_id, amenity_id):
     if not amenity:
         abort(404)
 
-    if amenity not in place_amenities:
+    if amenity not in place.amenities:
         abort(404)
-    place_amenities.remove(amenity)
+    place.amenities.remove(amenity)
     place.save()
     return jsonify({}), 200
 
