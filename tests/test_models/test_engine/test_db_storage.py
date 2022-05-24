@@ -2,9 +2,8 @@
 """
 Contains the TestDBStorageDocs and TestDBStorage classes
 """
-
-import inspect
 from models import storage
+import inspect
 import models
 from models.engine import db_storage
 from models.amenity import Amenity
