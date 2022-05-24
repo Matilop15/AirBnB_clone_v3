@@ -53,7 +53,7 @@ def delete_place_amenity(place_id, amenity_id):
         if amenity not in place.amenities:
             abort(404)
         index = None
-    for idx, id in enumerate(place.amenity_ids):
+        for idx, id in enumerate(place.amenity_ids):
             if amenity.id == id:
                 index = idx
                 break
